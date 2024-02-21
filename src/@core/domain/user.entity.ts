@@ -32,14 +32,12 @@ export class User {
         this.props.document = value;
     }
 
-
     get email() {
         return this.props.email;
     }
     private set email(value: string) {
         this.props.email = value;
     }
-
 
     get password() {
         return this.props.password;
