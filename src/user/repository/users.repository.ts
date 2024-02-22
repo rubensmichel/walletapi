@@ -18,4 +18,8 @@ export class UserRepository implements Repository<User> {
     getByDocument(document: string){
         return this.user.find(user => document == user.document);
     }
+
+    getByEmail(email: string){
+        return this.user.find(user => email == user.email);
+    }
 }
