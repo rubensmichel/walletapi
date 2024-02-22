@@ -18,22 +18,23 @@ export class WalletService {
       throw new NotFoundException("user not found");
     }
 
+    var id = 1;
+    const ids = this.walletRepository.getAll().map(object => {
+      return object.id;
+    });
+    if (ids.length > 0){
+      id = 1 + Math.max(...ids);
+    }
+    createWalletDto.id = id;
+
     return this.walletRepository.create(createWalletDto);
   }
 
   findAll() {
-    return `This action returns all wallet`;
+    return this.walletRepository.getAll();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} wallet`;
-  }
-
-  update(id: number, updateWalletDto: UpdateWalletDto) {
-    return `This action updates a #${id} wallet`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} wallet`;
+    return this.walletRepository.getById(id);
   }
 }
