@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { WalletService } from './wallet.service';
 import { WalletController } from './wallet.controller';
-import { UserRepository } from 'src/user/repository/users.repository';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
-  imports: [UserRepository],
+  imports: [UserModule],
   controllers: [WalletController],
   providers: [WalletService],
 })
