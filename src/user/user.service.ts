@@ -34,6 +34,10 @@ export class UserService {
     return this.usersRepository.getAll();
   }
 
+  findById(id: number) {
+    return this.usersRepository.getById(id);
+  }
+
   findByDocument(document: string) {
     return this.usersRepository.getByDocument(document);
   }

@@ -15,6 +15,10 @@ export class UserRepository implements Repository<User> {
         return this.user;
     }
 
+    getById(id: number){
+        return this.user.find(user => id == user.id);
+    }
+
     getByDocument(document: string){
         return this.user.find(user => document == user.document);
     }
