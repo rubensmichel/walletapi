@@ -18,6 +18,15 @@ export class UserService {
       throw new BadRequestException("user with this email already create");
     }
 
+    var id = 1;
+    const ids = this.usersRepository.getAll().map(object => {
+      return object.id;
+    });
+    if (ids.length > 0){
+      id = 1 + Math.max(...ids);
+    }
+    createUserDto.id = id;
+
     return this.usersRepository.create(createUserDto);
   }
 
