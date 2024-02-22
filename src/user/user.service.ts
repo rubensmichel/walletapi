@@ -8,6 +8,11 @@ export class UserService {
   constructor(@Inject('Repository') private usersRepository: Repository<User>) {}
 
   create(createUserDto: CreateUserDto) {
+    let user = this.findOne(createUserDto.document)
+    if (user != null){
+      console.log("oi")
+    }
+
     return this.usersRepository.create(createUserDto);
   }
 

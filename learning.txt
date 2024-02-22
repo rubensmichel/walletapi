@@ -1,1 +1,2 @@
 nest generate resource user
+https://www.youtube.com/watch?v=cu2t5zL9x7U
