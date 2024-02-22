@@ -19,7 +19,7 @@ export class UserController {
   }
 
   @Get(':document')
-  findOne(@Param('document') document: string) {
-    return this.userService.findOne(document);
+  findByDoc(@Param('document') document: string) {
+    return this.userService.findByDocument(document);
   }
 }

@@ -15,7 +15,7 @@ export class UserRepository implements Repository<User> {
         return this.user;
     }
 
-    getOne(document: string){
+    getByDocument(document: string){
         return this.user.find(user => document == user.document);
     }
 }

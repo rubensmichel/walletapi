@@ -1,18 +1,18 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Repository } from './repository/repository';
 import { User } from './entities/user.entity';
+import { Logger } from '@nestjs/common';
 
 @Injectable()
 export class UserService {
   constructor(@Inject('Repository') private usersRepository: Repository<User>) {}
 
   create(createUserDto: CreateUserDto) {
-    let user = this.findOne(createUserDto.document)
+    let user = this.findByDocument(createUserDto.document)
     if (user != null){
-      console.log("oi")
+      throw new BadRequestException("user with this document already create");
     }
-
     return this.usersRepository.create(createUserDto);
   }
 
@@ -20,8 +20,8 @@ export class UserService {
     return this.usersRepository.getAll();
   }
 
-  findOne(document: string) {
-    return this.usersRepository.getOne(document);
+  findByDocument(document: string) {
+    return this.usersRepository.getByDocument(document);
   }
 }
 
