@@ -1,11 +1,13 @@
 import { NotFoundException, Injectable, Inject } from '@nestjs/common';
 import { CreateWalletDto } from './dto/create-wallet.dto';
 import { UpdateWalletDto } from './dto/update-wallet.dto';
-import { UserRepository } from 'src/user/repository/users.repository';
 import { UserService } from 'src/user/user.service';
+import { Wallet } from './entities/wallet.entity';
+import { Repository } from './repository/repository';
 
 @Injectable()
 export class WalletService {
+  constructor(@Inject('Repository') private walletRepository: Repository<Wallet>) {}
 
   @Inject(UserService)
   private readonly userService: UserService;
@@ -16,7 +18,7 @@ export class WalletService {
       throw new NotFoundException("user not found");
     }
 
-    return this.create(createWalletDto);
+    return this.walletRepository.create(createWalletDto);
   }
 
   findAll() {
