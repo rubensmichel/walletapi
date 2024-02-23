@@ -36,13 +36,17 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
+$ docker build -t wallet-api .
 
 # production mode
-$ npm run start:prod
+$ docker run --rm -p 3000:3000 wallet-api
+```
+
+## Documentation
+
+```bash
+# development
+$ http://localhost:3000/swagger
 ```
 
 ## Test
