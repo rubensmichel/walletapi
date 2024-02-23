@@ -3,8 +3,7 @@ import { TransferDto } from './dto/transfer.dto';
 import { WalletService } from 'src/wallet/wallet.service';
 import { Repository } from './repository/repository';
 import { Transfer } from './entities/transfer.entity';
-import { Observable } from 'rxjs';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 @Injectable()
 export class TransferService {
@@ -32,15 +31,12 @@ export class TransferService {
         this.walletService.debit(walletOrigin, transferDto.value)
 
         let statusCode = await axios.post('https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc',
-        {
-          headers: {
-            'Content-Type': 'application/json',
-        },
+        {headers: {'Content-Type': 'application/json'},
         }).then((res) => {
             return res.status;
         });
 
-        if (statusCode != 201){
+        if (statusCode != 200){
             Logger.log("unauthorized transfer, executing rollback")
             this.walletService.credit(walletOrigin, transferDto.value)
             throw new ConflictException("unauthorized transfer");
