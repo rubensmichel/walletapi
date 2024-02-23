@@ -31,8 +31,7 @@ export class TransferService {
         this.walletService.debit(walletOrigin, transferDto.value)
 
         let statusCode = await axios.post('https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc',
-        {headers: {'Content-Type': 'application/json'},
-        }).then((res) => {
+        ).then((res) => {
             return res.status;
         });
 
@@ -44,6 +43,10 @@ export class TransferService {
         
         this.walletService.credit(walletDest, transferDto.value)
         this.transferRepository.create(transferDto)
+
+        Logger.log("send notification about credit in destination wallet")
+        const params = JSON.stringify(TransferDto);
+        await axios.post('https://run.mocky.io/v3/5794d450-d2e2-4412-8131-73d0293ac1cc', params)
 
         return
     }
