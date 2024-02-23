@@ -7,6 +7,7 @@ import { WalletRepository } from './repository/wallet.repository';
 @Module({
   imports: [UserModule],
   controllers: [WalletController],
+  exports: [WalletService],
   providers: [WalletService, {
     provide: 'Repository',
     useClass: WalletRepository,
