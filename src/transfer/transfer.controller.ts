@@ -1,5 +1,5 @@
 import { TransferService } from './transfer.service';
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { TransferDto } from './dto/transfer.dto';
 
 @Controller('transfer')
@@ -9,6 +9,11 @@ export class TransferController {
   @Post()
   transfer(@Body() transferDto: TransferDto) {
     return this.transferService.transfer(transferDto);
+  }
+
+  @Get()
+  transferList() {
+    return this.transferService.list();
   }
 
 }

@@ -25,7 +25,11 @@ export class TransferService {
         this.walletService.debit(walletOrigin, transferDto.value)
         this.walletService.credit(walletDest, transferDto.value)
         this.transferRepository.create(transferDto)
-        
+
         return
+    }
+
+    list() {
+        return this.transferRepository.getAll();
     }
 }
